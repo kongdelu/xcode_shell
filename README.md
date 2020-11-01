@@ -27,7 +27,9 @@ Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not
 
 解决办法：
 
-在podfile中添加一下代码即可：
+- 去掉 use_frameworks! 或使用 use_modular_headers! 代替
+
+- 在podfile中添加一下代码即可：
 ```
 post_install do |installer|
     installer.pods_project.targets.each do |target|
