@@ -17,11 +17,11 @@ The issue is that the newest version of Cocoapods is trying to sign the framewor
 
 - 打包成功，但是导出失败
 
-``
+```
 error: exportArchive: AFNetworking.framework does not support provisioning profiles.
 
 Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not support provisioning profiles." UserInfo={IDEDistributionIssueSeverity=3, NSLocalizedDescription=AFNetworking.framework does not support provisioning profiles., NSLocalizedRecoverySuggestion=AFNetworking.framework does not support provisioning profiles, but provisioning profile ZG-AdHoc has been manually specified. Remove this item from the "provisioningProfiles" dictionary in your Export Options property list.}
-``
+```
 
 解决办法：
 
