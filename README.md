@@ -7,13 +7,20 @@ xcode8.3版本以前使用的是 PackageApplication
 不要勾选 xcode 中的 Automatically manage signing，使用在命令指定签名证书的方式；
 
 ### 遇到的问题
-如果项目中使用了cocoapods管理三方库，在编译时会遇到如下错误：
+- 如果项目中使用了cocoapods管理三方库，在编译时会遇到如下错误：
 
 ``
 error: Pods-DuduiOS does not support provisioning profiles. Pods-DuduiOS does not support provisioning profiles, but provisioning profile XX-AdHoc has been manually specified. Set the provisioning profile value to "Automatic" in the build settings editor. (in target 'Pods-DuduiOS' from project 'Pods')
 ``
 
 The issue is that the newest version of Cocoapods is trying to sign the frameworks.
+
+- 打包成功，但是导出失败
+``
+error: exportArchive: AFNetworking.framework does not support provisioning profiles.
+
+Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not support provisioning profiles." UserInfo={IDEDistributionIssueSeverity=3, NSLocalizedDescription=AFNetworking.framework does not support provisioning profiles., NSLocalizedRecoverySuggestion=AFNetworking.framework does not support provisioning profiles, but provisioning profile ZG-AdHoc has been manually specified. Remove this item from the "provisioningProfiles" dictionary in your Export Options property list.}
+``
 
 解决办法：
 
@@ -32,3 +39,5 @@ end
 
 ### 参考
 https://stackoverflow.com/questions/55419956/how-to-fix-pod-does-not-support-provisioning-profiles-in-azure-devops-build
+
+https://stackoverflow.com/questions/39954673/manual-signing-fails-for-xcode-test-with-embedded-library-can-it-be-decomposed
