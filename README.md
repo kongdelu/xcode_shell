@@ -27,21 +27,21 @@ Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not
 
 解决办法：
 
-- 去掉 use_frameworks! 或使用 use_modular_headers! 代替
+- 去掉 use_frameworks! 或使用 use_modular_headers! 代替;
 
-- 在podfile中添加一下代码即可：
+-- 在podfile中添加一下代码即可：
 ```
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ""
-            config.build_settings['PROVISIONING_PROFILE'] = ""
-            config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
-            config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
-            config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
-        end
-    end
-end
+--post_install do |installer|
+  --  installer.pods_project.targets.each do |target|
+    --    target.build_configurations.each do |config|
+      --      config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ""
+        --    config.build_settings['PROVISIONING_PROFILE'] = ""
+          --  config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
+           -- config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
+           -- config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+       -- end
+  --  end
+-- end
 ```
 
 ### 参考
