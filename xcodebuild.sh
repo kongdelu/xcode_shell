@@ -27,11 +27,11 @@ ENTERPRISECODE_SIGN_IDENTITY="iPhone Distribution: xxx (xxx)"
 ENTERPRISEROVISIONING_PROFILE_NAME="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 #加载各个版本的plist文件
-ADHOCExportOptionsPlist=./ADHOCExportOptionsPlist.plist
-AppStoreExportOptionsPlist=./AppStoreExportOptionsPlist.plist
-EnterpriseExportOptionsPlist=./EnterpriseExportOptionsPlist.plist
+AdhocExportOptionsPlist=./adhoc_export_option.plist
+AppStoreExportOptionsPlist=./appstore_export_option.plist
+EnterpriseExportOptionsPlist=./enterprise_export_option.plist
 
-ADHOCExportOptionsPlist=${ADHOCExportOptionsPlist}
+AdhocExportOptionsPlist=${AdhocExportOptionsPlist}
 AppStoreExportOptionsPlist=${AppStoreExportOptionsPlist}
 EnterpriseExportOptionsPlist=${EnterpriseExportOptionsPlist}
 
@@ -62,7 +62,7 @@ xcodebuild -exportArchive -archivePath build/$Project_Name-appstore.xcarchive -e
     then
 #adhoc脚本
 xcodebuild -workspace $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY="${ADHOCCODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ADHOCPROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AdHocBundleID}"
-xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $ADHOCExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
+xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $AdhocExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
     elif [ "$method" = "3" ]
     then
 #企业打包脚本
