@@ -4,7 +4,7 @@
 使用 xcodebuild -exportArchive -archivePath
 xcode8.3版本以前使用的是 PackageApplication
 
-使用时需要将xcode中的Automatically manage signing取消勾选，不要自动管理签名，使用在命令指定签名证书的方式；
+不要勾选 xcode 中的 Automatically manage signing，使用在命令指定签名证书的方式；
 
 ### 遇到的问题
 如果项目中使用了cocoapods管理三方库，在编译时会遇到如下错误：
