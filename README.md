@@ -16,6 +16,7 @@ error: Pods-DuduiOS does not support provisioning profiles. Pods-DuduiOS does no
 The issue is that the newest version of Cocoapods is trying to sign the frameworks.
 
 - 打包成功，但是导出失败
+
 ``
 error: exportArchive: AFNetworking.framework does not support provisioning profiles.
 
@@ -29,6 +30,8 @@ Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
+            config.build_settings['PROVISIONING_PROFILE_SPECIFIER'] = ""
+            config.build_settings['PROVISIONING_PROFILE'] = ""
             config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
             config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
             config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
