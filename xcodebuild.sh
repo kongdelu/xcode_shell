@@ -36,9 +36,9 @@ AppStoreExportOptionsPlist=${AppStoreExportOptionsPlist}
 EnterpriseExportOptionsPlist=${EnterpriseExportOptionsPlist}
 
 echo "===选择打包方式(输入序号)==="
-echo "		1 appstore"
-echo "		2 adhoc"
-echo "		3 enterprise"
+echo "	1 Appstore"
+echo "	2 Adhoc"
+echo "	3 Enterprise"
 
 # 读取用户输入并存到变量里
 read parameter
