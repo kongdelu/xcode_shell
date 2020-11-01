@@ -10,6 +10,6 @@
   <key>compileBitcode</key>
       <false/>
 	<key>method</key>
-	<string>ad-hoc</string>
+	<string>（填 ad-hoc 或者 app-store）</string>
 </dict>
 </plist>
