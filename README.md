@@ -23,6 +23,8 @@ error: exportArchive: AFNetworking.framework does not support provisioning profi
 Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not support provisioning profiles." UserInfo={IDEDistributionIssueSeverity=3, NSLocalizedDescription=AFNetworking.framework does not support provisioning profiles., NSLocalizedRecoverySuggestion=AFNetworking.framework does not support provisioning profiles, but provisioning profile ZG-AdHoc has been manually specified. Remove this item from the "provisioningProfiles" dictionary in your Export Options property list.}
 ```
 
+这是 Podfile 文件中使用了 use_frameworks!造成的坑，这是因为使用了 use_frameworks! 后,CocoaPods 要对每一个 Framework 进行证书签名,而每个 Framework 的 bundleID 都是不一样的;
+
 解决办法：
 
 在podfile中添加一下代码即可：
@@ -44,3 +46,5 @@ end
 https://stackoverflow.com/questions/55419956/how-to-fix-pod-does-not-support-provisioning-profiles-in-azure-devops-build
 
 https://stackoverflow.com/questions/39954673/manual-signing-fails-for-xcode-test-with-embedded-library-can-it-be-decomposed
+
+http://ddrv.cn/a/315218
