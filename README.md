@@ -34,7 +34,7 @@ Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not
 
 The Swift pod `DKPhotoGallery` depends upon `SDWebImage`, which does not define modules. To opt into those targets generating module maps (which is necessary to import them from Swift when building as static libraries), you may set `use_modular_headers!` globally in your Podfile, or specify `:modular_headers => true` for particular dependencies.
 ```
-必须使用加 use_modular_headers!
+必须加 use_modular_headers!
 
 
 ### 参考
