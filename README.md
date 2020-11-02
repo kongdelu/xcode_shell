@@ -28,6 +28,13 @@ Error Domain=IDEProvisioningErrorDomain Code=10 "AFNetworking.framework does not
 解决办法：
 
 - 去掉 use_frameworks! 或使用 use_modular_headers! 代替;
+如果pod中引用了swift写的三方库，仅仅去掉 use_framworks!，执行pod install时会报错：
+```
+[!] The following Swift pods cannot yet be integrated as static libraries:
+
+The Swift pod `DKPhotoGallery` depends upon `SDWebImage`, which does not define modules. To opt into those targets generating module maps (which is necessary to import them from Swift when building as static libraries), you may set `use_modular_headers!` globally in your Podfile, or specify `:modular_headers => true` for particular dependencies.
+```
+必须使用加 use_modular_headers!
 
 
 ### 参考
