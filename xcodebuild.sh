@@ -53,32 +53,32 @@ fi
 if [ $method == 1 ]
 then
    echo "Clean..."
-   rm -rf ~/Desktop/$Project_Name-appstore.ipa
+   rm -rf ~/Desktop/$Project_Name-adhoc.ipa
    rm -rf build/
-   xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+   xcodebuild -quiet clean -workspace ./$Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration
    echo "===================== Appstore 打包 ====================="
-   xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-appstore.xcarchive clean archive build  CODE_SIGN_IDENTITY="${APPSTORECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${APPSTOREROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AppStoreBundleID}"
-   xcodebuild -exportArchive -archivePath build/$Project_Name-appstore.xcarchive -exportOptionsPlist $AppStoreExportOptionsPlist -exportPath ~/Desktop/$Project_Name-appstore.ipa
+   xcodebuild -quiet -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-appstore.xcarchive clean archive build  CODE_SIGN_IDENTITY="${APPSTORECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${APPSTOREROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AppStoreBundleID}"
+   xcodebuild -quiet -exportArchive -archivePath build/$Project_Name-appstore.xcarchive -exportOptionsPlist $AppStoreExportOptionsPlist -exportPath ~/Desktop/$Project_Name-appstore.ipa
 
 elif [ $method == 2 ]
 then
    echo "Clean..."
    rm -rf ~/Desktop/$Project_Name-adhoc.ipa
    rm -rf build/
-   xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+   xcodebuild -quiet clean -workspace ./$Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration
    echo "===================== Adhoc 打包 ====================="
-   xcodebuild -workspace $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY="${ADHOCCODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ADHOCPROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AdHocBundleID}"
-   xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $AdhocExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
+   xcodebuild -quiet -workspace $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY="${ADHOCCODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ADHOCPROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AdHocBundleID}"
+   xcodebuild -quiet -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $AdhocExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
 
 elif [ $method == 3 ]
 then
     echo "Clean..."
-    rm -rf ~/Desktop/$Project_Name-enterprise.ipa
+    rm -rf ~/Desktop/$Project_Name-adhoc.ipa
     rm -rf build/
-    xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+    xcodebuild -quiet clean -workspace ./$Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration
     echo "===================== Enterprise 打包 ====================="
-    xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-enterprise.xcarchive clean archive build CODE_SIGN_IDENTITY="${ENTERPRISECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ENTERPRISEROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${EnterpriseBundleID}"
-    xcodebuild -exportArchive -archivePath build/$Project_Name-enterprise.xcarchive -exportOptionsPlist $EnterpriseExportOptionsPlist -exportPath ~/Desktop/$Project_Name-enterprise.ipa
+    xcodebuild -quiet -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-enterprise.xcarchive clean archive build CODE_SIGN_IDENTITY="${ENTERPRISECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ENTERPRISEROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${EnterpriseBundleID}"
+    xcodebuild -quiet -exportArchive -archivePath build/$Project_Name-enterprise.xcarchive -exportOptionsPlist $EnterpriseExportOptionsPlist -exportPath ~/Desktop/$Project_Name-enterprise.ipa
 
 else
    echo "无效序号..."
