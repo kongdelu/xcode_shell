@@ -47,3 +47,5 @@ https://stackoverflow.com/questions/55419956/how-to-fix-pod-does-not-support-pro
 https://stackoverflow.com/questions/39954673/manual-signing-fails-for-xcode-test-with-embedded-library-can-it-be-decomposed
 
 http://ddrv.cn/a/315218
+
+https://www.jianshu.com/p/770d5df137bf
