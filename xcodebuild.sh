@@ -53,7 +53,7 @@ fi
 if [ $method == 1 ]
 then
    echo "Clean..."
-   rm -rf ~/Desktop/$Project_Name-adhoc.ipa
+   rm -rf ~/Desktop/$Project_Name-appstore.ipa
    rm -rf build/
    xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
    echo "===================== Appstore 打包 ====================="
@@ -73,7 +73,7 @@ then
 elif [ $method == 3 ]
 then
     echo "Clean..."
-    rm -rf ~/Desktop/$Project_Name-adhoc.ipa
+    rm -rf ~/Desktop/$Project_Name-enterprise.ipa
     rm -rf build/
     xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
     echo "===================== Enterprise 打包 ====================="
