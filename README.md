@@ -1,7 +1,10 @@
 ### xcode_shell
 一键打包shell脚本
 
+如果想输出详细日志，需要把 -quiet 选项去掉；
+
 使用 xcodebuild -exportArchive -archivePath
+
 xcode8.3版本以前使用的是 PackageApplication
 
 不要勾选 xcode 中的 Automatically manage signing，使用在命令指定签名证书的方式；
