@@ -35,41 +35,52 @@ AdhocExportOptionsPlist=${AdhocExportOptionsPlist}
 AppStoreExportOptionsPlist=${AppStoreExportOptionsPlist}
 EnterpriseExportOptionsPlist=${EnterpriseExportOptionsPlist}
 
-echo "===选择打包方式(输入序号)==="
-echo "	1 Appstore"
-echo "	2 Adhoc"
-echo "	3 Enterprise"
-
-# 读取用户输入并存到变量里
-read parameter
+echo "====================="
+echo "    1 Appstore"
+echo "    2 Adhoc"
+echo "    3 Enterprise"
+echo "====================="
+## 读取用户输入并存到变量里
+read -p "选择打包方式(输入序号):" num
 sleep 0.5
-method="$parameter"
-
+method=$num
 # 判读用户是否有输入
-if [ -n "$method" ]
+if [ ! -n "$method" ];then
+    echo "exit"
+    exit
+fi
+
+if [ $method == 1 ]
 then
+   echo "Clean..."
+   rm -rf ~/Desktop/$Project_Name-adhoc.ipa
+   rm -rf build/
+   xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+   echo "===================== Appstore 打包 ====================="
+   xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-appstore.xcarchive clean archive build  CODE_SIGN_IDENTITY="${APPSTORECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${APPSTOREROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AppStoreBundleID}"
+   xcodebuild -exportArchive -archivePath build/$Project_Name-appstore.xcarchive -exportOptionsPlist $AppStoreExportOptionsPlist -exportPath ~/Desktop/$Project_Name-appstore.ipa
 
-#clean下
-xcodebuild clean -xcworkspace ./$Project_Name/$Project_Name.xcworkspace -configuration $Configuration -alltargets
+elif [ $method == 2 ]
+then
+   echo "Clean..."
+   rm -rf ~/Desktop/$Project_Name-adhoc.ipa
+   rm -rf build/
+   xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+   echo "===================== Adhoc 打包 ====================="
+   xcodebuild -workspace $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY="${ADHOCCODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ADHOCPROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AdHocBundleID}"
+   xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $AdhocExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
 
-    if [ "$method" = "1" ]
-    then
+elif [ $method == 3 ]
+then
+    echo "Clean..."
+    rm -rf ~/Desktop/$Project_Name-adhoc.ipa
+    rm -rf build/
+    xcodebuild clean -workspace ./$Project_Name.xcworkspace -configuration $Configuration
+    echo "===================== Enterprise 打包 ====================="
+    xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-enterprise.xcarchive clean archive build CODE_SIGN_IDENTITY="${ENTERPRISECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ENTERPRISEROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${EnterpriseBundleID}"
+    xcodebuild -exportArchive -archivePath build/$Project_Name-enterprise.xcarchive -exportOptionsPlist $EnterpriseExportOptionsPlist -exportPath ~/Desktop/$Project_Name-enterprise.ipa
 
-#appstore脚本
-xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-appstore.xcarchive clean archive build  CODE_SIGN_IDENTITY="${APPSTORECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${APPSTOREROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AppStoreBundleID}"
-xcodebuild -exportArchive -archivePath build/$Project_Name-appstore.xcarchive -exportOptionsPlist $AppStoreExportOptionsPlist -exportPath ~/Desktop/$Project_Name-appstore.ipa
-    elif [ "$method" = "2" ]
-    then
-#adhoc脚本
-xcodebuild -workspace $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-adhoc.xcarchive clean archive build CODE_SIGN_IDENTITY="${ADHOCCODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ADHOCPROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${AdHocBundleID}"
-xcodebuild -exportArchive -archivePath build/$Project_Name-adhoc.xcarchive -exportOptionsPlist $AdhocExportOptionsPlist -exportPath ~/Desktop/$Project_Name-adhoc.ipa
-    elif [ "$method" = "3" ]
-    then
-#企业打包脚本
-xcodebuild -project $Project_Name.xcworkspace -scheme $Project_Name -configuration $Configuration -archivePath build/$Project_Name-enterprise.xcarchive clean archive build CODE_SIGN_IDENTITY="${ENTERPRISECODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${ENTERPRISEROVISIONING_PROFILE_NAME}" PRODUCT_BUNDLE_IDENTIFIER="${EnterpriseBundleID}"
-xcodebuild -exportArchive -archivePath build/$Project_Name-enterprise.xcarchive -exportOptionsPlist $EnterpriseExportOptionsPlist -exportPath ~/Desktop/$Project_Name-enterprise.ipa
 else
-    echo "参数无效...."
-    exit 1
-    fi
+   echo "无效序号..."
+   exit 1
 fi
