@@ -2,6 +2,7 @@
 一键打包shell脚本
 
 如果想输出详细日志，需要把 -quiet 选项去掉；
+-quiet “do not print any output except for warnings and errors”
 
 使用 xcodebuild -exportArchive -archivePath
 
